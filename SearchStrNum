@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class StrNum {
+	
+	public static int strSearch(String str,String strsub){
+		int index=0;
+		int firstindex=0;
+		int count=0;
+		while((index=str.indexOf(strsub,firstindex))!=-1){
+			firstindex=index+strsub.length();
+			count++;
+		}
+		return count;
+		
+	}
+	
+	
+	public static void main(String []args){
+		String str="good morning hello world nigi sadcc ni";
+		Scanner sc=new Scanner(System.in);
+		String strsub=sc.next();
+//		String strsub="ni";
+		int count=strSearch(str,strsub);
+		System.out.println(strsub+"出现的次数为:"+count);
+		
+	}
+}
