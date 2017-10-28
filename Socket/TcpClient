@@ -1,0 +1,42 @@
+public class TcpClient {
+
+	public static void main(String[] args) {
+		Socket s=null;
+		BufferedReader in=null;
+		PrintWriter out=null;
+		try {
+			    s=new Socket("127.0.0.1",8787);
+				in=new BufferedReader(new InputStreamReader(s.getInputStream()));
+				out=new PrintWriter(new OutputStreamWriter(s.getOutputStream()),true);
+				while(true){
+				System.out.println("客户端");
+				Scanner sc=new Scanner(System.in);
+				String str=sc.nextLine();
+				out.println(str);
+				if(str.equals("exit")){
+						break;
+				}
+				String msg=in.readLine();
+				System.out.println("服务端接受的数据为："+msg);
+				}
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{
+				try {
+					if(in!=null)
+					    in.close();
+					if(out!=null)
+						out.close();
+					if(s!=null)
+						s.close();
+				
+				} catch (Exception e2) {
+				
+				}	
+			}
+
+	}
+
+}
