@@ -1,0 +1,54 @@
+public class TcpServer {
+	
+	public static void main(String[] args) {
+		ServerSocket ss=null;
+		Socket s=null;
+		BufferedReader in=null;
+		PrintWriter out=null;
+		
+		
+		try {
+			ss=new ServerSocket(8787);
+			System.out.println("服务器启动...");
+			s=ss.accept();
+			System.out.println("有客户端连接"+s.getInetAddress());
+			in=new BufferedReader(new InputStreamReader(s.getInputStream()));
+			out=new PrintWriter(new OutputStreamWriter(s.getOutputStream()),true);
+			
+			while(true){
+				String str=in.readLine();
+				if(str.equals("exit")){
+					break;
+				}
+//				String msg=in.readLine();
+				System.out.println("接受客户端的数据为："+str);
+				Scanner sc=new Scanner(System.in);
+				System.out.println("服务端传入数据：");
+				String strin=sc.nextLine();
+				out.println(strin);
+			
+			}
+			
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+		}finally{
+			try {
+				if(in!=null)
+				    in.close();
+				if(out!=null)
+					out.close();
+				if(s!=null)
+					s.close();
+				if(ss!=null)
+					ss.close();
+			
+			} catch (Exception e2) {
+			
+			}	
+		}
+
+	}
+
+
+}
